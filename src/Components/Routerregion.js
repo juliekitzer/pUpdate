@@ -5,17 +5,21 @@ import Login from '../Pages/Login';
 import Register from '../Pages/Register';
 import Lost from '../Pages/Lost';
 import Error from '../Pages/Error';
-function Routerregion() {
+function Routerregion({ isAuthenticated, setIsAuthenticated, user, setUser }) {
     return (
         <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/Dashboard' element={<Dashboard />} />
-            <Route path='/Register' element={<Register />} />
-            <Route path='/Login' element={<Login />} />
             <Route path='/Lost' element={<Lost />} />
             <Route path='/Error' element={<Error />} />
+            <Route path='/Register' element={<Register />} />
+            <Route path='/Login' element={<Login isAuthenticated = {isAuthenticated} setIsAuthenticated = {setIsAuthenticated} 
+            user = {user}
+            setUser ={setUser}
+            />} />
         </Routes>
     )
 }
+
 
 export default Routerregion;

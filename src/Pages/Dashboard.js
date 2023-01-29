@@ -1,10 +1,10 @@
 function Dashboard() {
     async function GetAllItems() {
-        let res = await fetch("localhost:3005/api/menu")
+        let res = await fetch("localhost:3005/api/Dashboard")
         res = res.json
         console.log(res);
     }
-    GetAllItems()
+    // GetAllItems()
     return (
         <h1>Welcome, user!</h1>
     )

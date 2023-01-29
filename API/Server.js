@@ -14,6 +14,28 @@ app.use(
     })
 )
 
+
+// const db = {}
+// const sequelize = new Sequelize('database', 'username', 'password', {
+//     host: 'localhost',
+//     dialect: 'postgres',
+  
+//     pool: {
+//       max: 5,
+//       min: 0,
+//       acquire: 30000,
+//       idle: 10000
+//     },
+
+//     operatorsAliases: false
+// });
+// db.sequelize = sequelize
+// db.Sequelize = Sequelize
+
+
+
+
+
 app.listen(portNumber, function (req, res) {
     console.log(`Listening on port ${portNumber}`);
 })
@@ -34,38 +56,45 @@ app.get("*", async function (req, res) {
     res.render("Lost");
 })
 
-app.post ("/Register", async function(req, res){
+app.post("/Register", async function (req, res) {
     //Deconstruct Inputs
-    const {firstname, lastname, email, username, password, birthday} = req.body;
+    const { firstname, lastname, email, username, password, birthday } = req.body;
     //Hash the password
     //Create the entry in the database
     let theHashedPassword = await bcrypt.hash(password, 10)
     let createdUser = await User.create({
-        firstname:firstname,
-        lastname:lastname,
-        email:email,
-        username:username,
-        password:theHashedPassword,
-        birthday:birthday,
+        firstname: firstname,
+        lastname: lastname,
+        email: email,
+        username: username,
+        password: theHashedPassword,
+        birthday: birthday,
         createdAt: new Date(),
         updatedAt: new Date()
     })
-//    console.log("this is a request body", req.body);
-//    console.log("this is the whole request", req)
+    res.send("success");
+    //    console.log("this is a request body", req.body);
+    //    console.log("this is the whole request", req)
 })
 
 app.post('/verification', async function (req, res) {
     console.log('Weve arrived at verification');
     const { username, password } = req.body;
     let theUserInformation = await User.findOne({
-        where: {username: username}
+        where: { username: username }
     })
-    let theResult = await bcrypt.compare(password, theUserInformation.password)
-    console.log(theResult);
-    if (theResult) {
-        res.status(201).send('Login sucessful!');
-    } else {
-        res.status(404).send('Login failed.');
+    if (theUserInformation != null) {
+        let theResult = await bcrypt.compare(password, theUserInformation.password)
+        console.log("This is the result:", theResult);
+        if (theResult) {
+            res.status(201).json(theUserInformation)
+            //.send('Login sucessful!');
+        } else {
+            res.status(404);
+        }
+    }
+    else {
+        res.status(404);
     }
 })
 
@@ -128,6 +157,7 @@ app.post('/api/User/create', async function (req, res) {
         password: password,
         birthday: birthday
     })
+    console.log(results);
     res.json({ results });
 })
 
@@ -138,11 +168,11 @@ app.get('/api/Dog', async function (req, res) {
     res.json({ results });
 })
 
-app.get('/api/Dog/:id', async function (req, res) {
-    let { id } = req.params;
-    let results = await Dog.findByPk(id);
-    res.json({ results });
-})
+// app.get('/api/Dog/:id', async function (req, res) {
+//     let { id } = req.params;
+//     let results = await Dog.findByPk(id);
+//     res.json({ results });
+// })
 
 app.post('/api/Dog/create', async function (req, res) {
     const { dogname, weight, breed, birthday, gotchaday, chipid, rabiestag, gender, spayedorneutered, food, allergies, sensitivities, medication, additional_info } = req.body;
@@ -174,14 +204,24 @@ app.post('/api/JoinTable/create', async function (req, res) {
     res.json({ results });
 })
 
-// app.get ('/api/Dog/:userid', async function (req, res){
-//     let { userid } = req.params;
-//     let resuklts = await sequelize.query({
-//         where: {
-//             userid:
-//         }
-//     })
-// })
+app.get('/api/Dog/:userid', async function (req, res) {
+    let { userid } = req.params;
+    let results = await Dog.findAll({
+        include: [
+            {
+              model: JoinTable,
+              where: { dogid },
+              required: true
+            },
+            {
+              model: User,
+              where: { userid: userid },
+              required: true
+            }
+          ]
+    })
+})
+
 
 
 

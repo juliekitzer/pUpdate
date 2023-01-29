@@ -1,6 +1,5 @@
-import React, {useState} from 'react';
-
-
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Register() {
 
@@ -12,6 +11,8 @@ function Register() {
         username: "",
         birthday: ""
     })
+
+    const navigate = useNavigate();
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -28,14 +29,11 @@ function Register() {
                     "birthday": user.birthday
                 }),
             });
-            let resJson = await res.json();
-            //   if (res.status === 200) {
-            //     setName("");
-            //     setEmail("");
-            //     setMessage("User created successfully");
-            //   } else {
-            //     setMessage("Some error occured");
-            //   }
+            let resJson = await res;
+            if (resJson = "success") {
+                navigate("/Login");
+            }
+
         } catch (err) {
             console.log(err);
         }
@@ -53,22 +51,22 @@ function Register() {
             <h1>Register</h1>
             <form onSubmit={handleSubmit}>
                 <label>First name</label>
-                <input type="text" name="firstname"  placeholder="First Name" onChange={(e) => handleChange('firstname', e.target.value)}/>
+                <input required="required" type="text" name="firstname" placeholder="First Name" onChange={(e) => handleChange('firstname', e.target.value)} />
 
                 <label>Last name:</label>
-                <input type="text" name="lastname" placeholder="Last Name" onChange={(e) => handleChange('lastname', e.target.value)}/>
+                <input required="required" type="text" name="lastname" placeholder="Last Name" onChange={(e) => handleChange('lastname', e.target.value)} />
 
                 <label>Email</label>
-                <input type="text" name="email"  placeholder="Email" onChange={(e) => handleChange('email', e.target.value)} />
+                <input required="required" type="text" name="email" placeholder="Email" onChange={(e) => handleChange('email', e.target.value)} />
 
                 <label>Username</label>
-                <input type="text" name="username" placeholder="Username" onChange={(e) => handleChange('username', e.target.value)} />
+                <input required="required" type="text" name="username" placeholder="Username" onChange={(e) => handleChange('username', e.target.value)} />
 
                 <label> Password: </label>
-                <input type="text" name="password" placeholder="Password" onChange={(e) => handleChange('password', e.target.value)}/>
+                <input required="required" type="text" name="password" placeholder="Password" onChange={(e) => handleChange('password', e.target.value)} />
 
                 <label> Birthday </label>
-                <input type="date" name="birthday" onChange={(e) => handleChange('birthday', e.target.value)} />
+                <input required="required" type="date" name="birthday" onChange={(e) => handleChange('birthday', e.target.value)} />
 
                 <button type="submit">Register</button>
             </form>
