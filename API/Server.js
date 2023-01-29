@@ -14,48 +14,6 @@ app.use(
     })
 )
 
-
-// const db = {}
-// const sequelize = new Sequelize('database', 'username', 'password', {
-//     host: 'localhost',
-//     dialect: 'postgres',
-  
-//     pool: {
-//       max: 5,
-//       min: 0,
-//       acquire: 30000,
-//       idle: 10000
-//     },
-
-//     operatorsAliases: false
-// });
-// db.sequelize = sequelize
-// db.Sequelize = Sequelize
-
-
-
-
-
-app.listen(portNumber, function (req, res) {
-    console.log(`Listening on port ${portNumber}`);
-})
-
-app.get("/", async function (req, res) {
-    res.render('Home')
-})
-
-app.get("/Login", async function (req, res) {
-    res.render('Login')
-})
-
-app.get("/Register", async function (req, res) {
-    res.render('Register')
-})
-
-app.get("*", async function (req, res) {
-    res.render("Lost");
-})
-
 app.post("/Register", async function (req, res) {
     //Deconstruct Inputs
     const { firstname, lastname, email, username, password, birthday } = req.body;
@@ -116,10 +74,16 @@ app.get('/api/Activity', async function (req, res) {
     res.json({ results });
 })
 
-app.get('/api/Activity/:id', async function (req, res) {
-    let { id } = req.params;
-    let results = await Activity.findByPk(id);
-    req.json({ results });
+app.get('/api/Activity/:dogid', async function (req, res) {
+    let { dogid } = req.params;
+    let results = await Activity.findAll({
+        include: [{
+            model: Dog,
+            required: true,
+            where: {id:dogid}
+        }]
+    });
+    res.json(results);
 })
 
 app.post('/api/Activity/create', async function (req, res) {
@@ -135,7 +99,6 @@ app.post('/api/Activity/create', async function (req, res) {
     res.json({ results });
 })
 
-
 app.get('/api/User', async function (req, res) {
     let results = await Activity.findAll();
     res.json({ results });
@@ -143,7 +106,7 @@ app.get('/api/User', async function (req, res) {
 
 app.get('/api/User/:id', async function (req, res) {
     let { id } = req.params;
-    let results = await User.findByFk(id);
+    let results = await User.findByPk(id);
     req.json({ results });
 })
 
@@ -161,16 +124,11 @@ app.post('/api/User/create', async function (req, res) {
     res.json({ results });
 })
 
-
-app.get('/api/Dog', async function (req, res) {
-    let results = await Dog.findAll();
-    console.log(results);
-    res.json({ results });
-})
-
-// app.get('/api/Dog/:id', async function (req, res) {
-//     let { id } = req.params;
-//     let results = await Dog.findByPk(id);
+// app.get('/api/Dog/id/:dogid', async function (req, res) {
+//     const {dogid} = req.params;
+//     let results = await Dog.findOne({
+//         where: {id : dogid}
+//     });
 //     res.json({ results });
 // })
 
@@ -206,23 +164,19 @@ app.post('/api/JoinTable/create', async function (req, res) {
 
 app.get('/api/Dog/:userid', async function (req, res) {
     let { userid } = req.params;
-    let results = await Dog.findAll({
-        include: [
-            {
-              model: JoinTable,
-              where: { dogid },
-              required: true
-            },
-            {
-              model: User,
-              where: { userid: userid },
-              required: true
-            }
-          ]
+    let results = await JoinTable.findAll({
+        where: {
+            userid: userid
+        },
+        include: Dog
     })
+   res.json(results);
+});
+
+
+app.listen(portNumber, function (req, res) {
+    console.log(`Listening on port ${portNumber}`);
 })
-
-
 
 
 

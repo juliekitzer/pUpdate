@@ -11,6 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Activity.belongsTo(models.Dog, {
+        foreignKey: 'dogid',
+        onDelete: 'CASCADE'
+      })
     }
   }
   Activity.init({

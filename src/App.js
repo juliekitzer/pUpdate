@@ -3,7 +3,7 @@ import Footer from "./Components/Footer";
 import { BrowserRouter as Router } from 'react-router-dom';
 import Routerregion from "./Components/Routerregion";
 import Register from "./Pages/Register";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 function App() {
 
     const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -26,8 +26,6 @@ function App() {
                 user={user}
                 setUser={setUserState}
                 />
-
-
             </Router>
             <Footer />
         </div>

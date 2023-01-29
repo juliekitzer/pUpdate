@@ -8,7 +8,7 @@ function Header({ isAuthenticated }) {
                 <li><Link to="/Login">Login</Link></li></>
             }
 
-                <li><Link to="/Home">Home</Link></li>
+                <li><Link to="/">Home</Link></li>
                 <li><Link to="/Dashboard">Dashboard</Link></li>
             </ul>
         </nav>

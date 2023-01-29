@@ -13,6 +13,9 @@ module.exports = (sequelize, DataTypes) => {
       Dog.hasMany(models.JoinTable, {
         foreignKey: 'dogid'
       });
+      Dog.hasMany(models.Activity, {
+        foreignKey: 'dogid'
+      });
     }
   }
   Dog.init({

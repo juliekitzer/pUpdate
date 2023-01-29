@@ -9,7 +9,9 @@ function Routerregion({ isAuthenticated, setIsAuthenticated, user, setUser }) {
     return (
         <Routes>
             <Route path='/' element={<Home />} />
-            <Route path='/Dashboard' element={<Dashboard />} />
+            <Route path='/Dashboard' element={<Dashboard isAuthenticated ={isAuthenticated} setIsAuthenticated = {setIsAuthenticated} 
+            user = {user}
+            setUser ={setUser}/>} />
             <Route path='/Lost' element={<Lost />} />
             <Route path='/Error' element={<Error />} />
             <Route path='/Register' element={<Register />} />
@@ -20,6 +22,5 @@ function Routerregion({ isAuthenticated, setIsAuthenticated, user, setUser }) {
         </Routes>
     )
 }
-
 
 export default Routerregion;
