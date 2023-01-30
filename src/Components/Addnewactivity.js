@@ -1,5 +1,5 @@
 import {useState} from 'react';
-
+import 'bulma/css/bulma.css';
 function Addnewactivity({AddThisactivity}){
     const [formInfo, setFormInfo] = useState({
         Activity: "",
@@ -15,18 +15,19 @@ function Addnewactivity({AddThisactivity}){
         event.preventDefault();
         AddThisactivity(formInfo)
     }
+
     return(
         <form onSubmit={onFormSubmit}>
-            <p>Dishname:</p>
-            <input name="dishname" onChange={onInputChange}/>
-            <p>Price:</p>
-            <input name="price" onChange={onInputChange}/>
+
+
+            <p>Activity:</p>
+            <input class="input is-rounded  is-primary" type="text" placeholder="Rounded input" name="Activity" onChange={onInputChange}/>
+            <p>Date:</p>
+            <input class="input is-rounded  is-primary" type="text"  name="Date" onChange={onInputChange}/>
+            <p>Time</p>
+            <input class="input is-rounded  is-primary" type="text" name="Time" onChange={onInputChange}/>
             <p>Description:</p>
-            <input name="description" onChange={onInputChange}/>
-            <p>Allergy Info:</p>
-            <input name="allergyinfo" onChange={onInputChange}/>
-            <p>Menu Section:</p>
-            <input name="menusection" onChange={onInputChange}/>
+            <input class="input is-rounded  is-primary" type="text" name="Description" onChange={onInputChange}/>
             <button type="submit">Submit</button>
         </form>
     )
