@@ -2,45 +2,58 @@ import React, { useDebugValue, useEffect, useState } from "react";
 import Activitycard from "../Components/Activitycard";
 import Addnewactivity from "../Components/Addnewactivity";
 import Modalpopup from "../Components/Modalpopup";
+import Adddog from "../Components/Adddog";
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
+import TabComponent from "../Components/TabComponent";
 import 'bulma/css/bulma.css'
 
+
 function Dashboard({ isAuthenticated, setIsAuthenticated, user, setUser }) {
-    
+
     const [dog, setDog] = useState([]);
     const [activities, setActivities] = useState([]);
     const [infoClicked, setInfoClicked] = useState(false);
-    const [loggedIn, setLoggedIn] = useState(false);
-    // useEffect(() => {
-    //     if (isAuthenticated) {
-    //         (async () => {
-    //             const dogs = await getDogsByUser(user.id)
-    //             setDog(dogs)
-    //         })();
-    //     }
-    // }, [])
+    const [dogsExist, setDogsExist] = useState(false);
+    const [activeTab, setActiveTab] = useState('');
+    useEffect(() => {
+        if (isAuthenticated) {
+            (async () => {
+                const dogs = await getDogsByUser(user.id)
+                setDog(dogs)
+                setDogsExist(true)
+                // console.log(dogs)
+            })();
+
+            // console.log("we've arrived")
+            // console.log("activities", activities);
+        }
+    }, [])
 
     // let dogList = dog.map
 
     useEffect(() => {
-        if (dog != []) {
+        if (dogsExist == true) {
+            // console.log("second condition");
             dog.forEach(doggy => {
-                console.log("tesinggggg", doggy.dogname);
+                // console.log("tesinggggg", doggy.dogname);
+
                 getActivitesByDog(doggy.dogid);
                 // setActivities(activityList)
             })
-
         }
-    }, [])
+    }, [dogsExist])
+
+
+
+
 
     function onInfoClick() {
         setInfoClicked(!infoClicked);
     }
-
 
     async function getDogsByUser(userid) {
         let res = await fetch(`http://localhost:3005/api/Dog/${userid}`)
@@ -51,16 +64,57 @@ function Dashboard({ isAuthenticated, setIsAuthenticated, user, setUser }) {
     }
 
     async function getActivitesByDog(dogid) {
+        // console.log('saving information for', dogid)
         let res = await fetch(`http://localhost:3005/api/Activity/${dogid}`)
         res = await res.json()
-        setActivities([...activities,res] );
-
+        setActivities(activities => [...activities, res]);
     }
 
-    let activitiescards;
-    if (activities.length > 0) {
-        console.log(activities);
-        activitiescards = activities.map(function (activity) {
+    function handleTabChange(value) {
+        setActiveTab(value)
+    }
+
+
+
+    let tabs
+    console.log("test", activities)
+
+    tabs = activities.map((activity, index) => {
+        console.log("testing again", activity)
+        if (activity.length > 0) {
+            return (
+
+                <TabComponent key={activity.id} tabId={index} activity={activity} dogName={activity[0].Dog.dogname} dogId={activity[0]['Dog'].id} activeTab={activeTab} handleTabChange={handleTabChange}
+                />)
+
+        }
+    })
+
+
+let moreInfo = <button className="button is-primary" onClick={onInfoClick}>Add activity</button>
+if (infoClicked) {
+    moreInfo = (
+        <div>
+            <Modalpopup handleClose={onInfoClick} open={infoClicked} dog={dog} activities={activities} user={user.id} />
+            <button onClick={onInfoClick}>Cancel</button>
+        </div>
+    )
+}
+
+let addDog = <button className="button is-primary" onClick={onInfoClick}>Add Dog</button>
+if (infoClicked) {
+    addDog = (
+        <div>
+            <Adddog handleClose={onInfoClick} open={infoClicked} user={user.id} />
+            <button onClick={onInfoClick}>Cancel</button>
+        </div>
+    )
+}
+
+let activitiescards;
+activities.forEach(dog => {
+    if (dog.length > 0) {
+        activitiescards = dog.map(function (activity) {
 
             return (
                 <Activitycard key={activity.id} activity={activity}
@@ -71,44 +125,48 @@ function Dashboard({ isAuthenticated, setIsAuthenticated, user, setUser }) {
             )
         })
     }
+})
 
-    let moreInfo = <button class="button is-primary" onClick={onInfoClick}>Add activity</button>
-    if (infoClicked) {
-        moreInfo = (
-            <div>
-                <Modalpopup handleClose={onInfoClick} open={infoClicked} dog={dog} activities={activities} user={user.id} />
-                <button onClick={onInfoClick}>Cancel</button>
-            </div>
-        )
-    }
 
-    return (
+
+// if (loggedIn) {
+//     (async () => {
+//         const dogs = await getDogsByUser(user.id);
+//         const activities = await getActivitesByDog(dog.id);
+//         setDog(dogs)
+//     })();
+
+// }
+
+return (
+    <div>
+        <h1 className="title">Welcome, {user.firstname}!</h1>
+        <div className="tabs is-boxed">
+            <ul>
+                {tabs}
+
+                <li className={activeTab == 1 ? "is-active" : ""}>
+
+                    <a>
+                        <span className="icon is-small"><i className="fas fa-music" aria-hidden="true"></i></span>
+                        <span>Add Dog</span>
+                    </a>
+                </li>
+
+            </ul>
+            <p>test</p>
+        </div>
         <div>
-       <div class="tabs is-boxed">
-  <ul>
-    <li class="is-active">
-      <a>
-        <span class="icon is-small"><i class="fas fa-image" aria-hidden="true"></i></span>
-        <span>Dashboard</span>
-      </a>
-    </li>
-    <li>
-      <a>
-        <span class="icon is-small"><i class="fas fa-music" aria-hidden="true"></i></span>
-        <span>Add Dog</span>
-      </a>
-    </li>
-    
-  </ul>
-</div>
-        <div>
-            <h1 className="title">Welcome, {user.firstname}!</h1>
+
             {/* {moreinfo}</div> */}
-            {activitiescards}
             {moreInfo}
+            {addDog}
         </div>
-        </div>
-    )
+        {activitiescards}
+    </div>
+
+
+)
 
 }
 export default Dashboard;

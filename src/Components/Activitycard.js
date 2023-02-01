@@ -27,17 +27,17 @@ function Activitycard({activity, DeleteThisactivity, EditThisactivity}){
 
  
 
-    let editArea = <button onClick={onEditClick}>Edit</button>
+    let editArea = <button onClick={onEditClick}  className="button is-primary is-light"> Edit </button>
     if(editClicked){
         editArea = (<div>
             <Editactivity activity={activity} EditThisactivity={EditThisactivity}/>
-            <button class="button is-primary"onClick={onEditClick}>Cancel</button>
+            <button className="button is-primary"onClick={onEditClick}>Cancel</button>
         </div>)
     }
     return(
-        <div class="buttons are small">
+        <div className="buttons are small">
              <h3>{activity.activity}</h3>
-            <button class="button is-primary" onClick={onDeleteClick}>Remove</button>
+            <button className="button is-primary" onClick={onDeleteClick}>Remove</button>
             {editArea}
            
             {/* <p>{activity.price.toFixed(2)}</p> */}

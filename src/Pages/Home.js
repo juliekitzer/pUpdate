@@ -1,3 +1,8 @@
+import '../stylesheets/headerStyle.css';
+import '../stylesheets/style.css';
+import '../stylesheets/headerStyle.css';
+import '../stylesheets/style.css';
+
 function Home() {
     return (
         <div>

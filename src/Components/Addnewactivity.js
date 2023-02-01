@@ -21,13 +21,13 @@ function Addnewactivity({AddThisactivity}){
 
 
             <p>Activity:</p>
-            <input class="input is-rounded  is-primary" type="text" placeholder="Rounded input" name="Activity" onChange={onInputChange}/>
+            <input className="input is-rounded  is-primary" type="text" placeholder="Rounded input" name="Activity" onChange={onInputChange}/>
             <p>Date:</p>
-            <input class="input is-rounded  is-primary" type="text"  name="Date" onChange={onInputChange}/>
+            <input className="input is-rounded  is-primary" type="text"  name="Date" onChange={onInputChange}/>
             <p>Time</p>
-            <input class="input is-rounded  is-primary" type="text" name="Time" onChange={onInputChange}/>
+            <input className="input is-rounded  is-primary" type="text" name="Time" onChange={onInputChange}/>
             <p>Description:</p>
-            <input class="input is-rounded  is-primary" type="text" name="Description" onChange={onInputChange}/>
+            <input className="input is-rounded  is-primary" type="text" name="Description" onChange={onInputChange}/>
             <button type="submit">Submit</button>
         </form>
     )

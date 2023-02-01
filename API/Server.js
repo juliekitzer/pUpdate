@@ -36,14 +36,14 @@ app.post("/Register", async function (req, res) {
 })
 
 app.post('/verification', async function (req, res) {
-    console.log('Weve arrived at verification');
+    // console.log('Weve arrived at verification');
     const { username, password } = req.body;
     let theUserInformation = await User.findOne({
         where: { username: username }
     })
     if (theUserInformation != null) {
         let theResult = await bcrypt.compare(password, theUserInformation.password)
-        console.log("This is the result:", theResult);
+        // console.log("This is the result:", theResult);
         if (theResult) {
             res.status(201).json(theUserInformation)
             //.send('Login sucessful!');
@@ -65,7 +65,7 @@ app.post('/api/join/:userid/:dogid', async function (req, res) {
         updatedAt: new Date()
     })
 
-    console.log(results);
+    // console.log(results);
     res.json({ results });
 })
 
@@ -120,7 +120,7 @@ app.post('/api/User/create', async function (req, res) {
         password: password,
         birthday: birthday
     })
-    console.log(results);
+    // console.log(results);
     res.json({ results });
 })
 
@@ -150,8 +150,9 @@ app.post('/api/Dog/create', async function (req, res) {
         medication: medication,
         additional_info: additional_info
     })
-    res.json({ results });
+    res.json({ results} );
 })
+
 
 app.post('/api/JoinTable/create', async function (req, res) {
     const { userid, dogid } = req.body;
@@ -175,7 +176,7 @@ app.get('/api/Dog/:userid', async function (req, res) {
 
 
 app.listen(portNumber, function (req, res) {
-    console.log(`Listening on port ${portNumber}`);
+    // console.log(`Listening on port ${portNumber}`);
 })
 
 

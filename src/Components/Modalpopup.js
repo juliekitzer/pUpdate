@@ -50,7 +50,7 @@ function Modalpopup({ handleClose, open, dog, user, activities }) {
                 <option name="dogid" value={dog['Dog'].id}>{dog['Dog'].dogname}</option>
             )
         })
-        console.log(dogOptions)
+        // console.log(dogOptions)
 
     }
 
@@ -60,10 +60,10 @@ function Modalpopup({ handleClose, open, dog, user, activities }) {
             <DialogContent>
                 
                 <form onSubmit={handleSubmit}>
-                <div class="field">
-                    <label class="label">Pup:</label>
-                    <div class="control">
-                        <div class="select">
+                <div className="field">
+                    <label className="label">Pup:</label>
+                    <div className="control">
+                        <div className="select">
                             <select required="required" onChange={(e) => handleChange('dogid', e.target.value)}>
                                 <option name="Dog name" value="Dog name">
 
@@ -76,10 +76,10 @@ function Modalpopup({ handleClose, open, dog, user, activities }) {
                     </div>
                 </div>
 
-                <div class="field">
-                    <label class="label">Activity</label>
-                    <div class="control">
-                        <div class="select">
+                <div className="field">
+                    <label className="label">Activity</label>
+                    <div className="control">
+                        <div className="select">
                             <select required="required" onChange={(e) => handleChange('Activity', e.target.value)}>
                                 <option name="Vet Visit" value="Vet Visit">
 
@@ -135,33 +135,33 @@ function Modalpopup({ handleClose, open, dog, user, activities }) {
                         </div>
                     </div>
                 </div>
-                <div class="field">
-                    <label class="label">Date</label>
-                    <div class="control">
-                        <input class="input" type="date" placeholder="Text input" required="required" onChange={(e) => handleChange('Date', e.target.value)} />
+                <div className="field">
+                    <label className="label">Date</label>
+                    <div className="control">
+                        <input className="input" type="date" placeholder="Text input" required="required" onChange={(e) => handleChange('Date', e.target.value)} />
                     </div>
                 </div>
 
-                <div class="field">
-                    <label class="label">Time</label>
-                    <div class="control">
-                        <input class="input" type="time" placeholder="Text input" required="required" onChange={(e) => handleChange('Time', e.target.value)} />
+                <div className="field">
+                    <label className="label">Time</label>
+                    <div className="control">
+                        <input className="input" type="time" placeholder="Text input" required="required" onChange={(e) => handleChange('Time', e.target.value)} />
                     </div>
                 </div>
 
-                <div class="field">
-                    <label class="label">Description</label>
-                    <div class="control">
-                        <textarea class="textarea" placeholder="Textarea" onChange={(e) => handleChange('Description', e.target.value)} ></textarea>
+                <div className="field">
+                    <label className="label">Description</label>
+                    <div className="control">
+                        <textarea className="textarea" placeholder="Textarea" onChange={(e) => handleChange('Description', e.target.value)} ></textarea>
                     </div>
                 </div>
 
-                <div class="field is-grouped">
-                    <div class="control">
-                        <button class="button is-link"> Submit </button>
+                <div className="field is-grouped">
+                    <div className="control">
+                        <button className="button is-link"> Submit </button>
                     </div>
-                    <div class="control">
-                        <button class="button is-link is-light" onClick={handleClose}>Cancel</button>
+                    <div className="control">
+                        <button className="button is-link is-light" onClick={handleClose}>Cancel</button>
                     </div>
                 </div>
                 </form>

@@ -1,0 +1,24 @@
+
+:root {
+    --black: #000000;
+    --white: #ffffff;
+    --teal: #74E7D9;
+    --mint: #CBF6F1;
+    --tan: #FFE8D6;
+    --brown: #cb997e;
+  }
+  
+  .navbar .is-tan{
+      background-color:var(--tan);
+  }
+  
+  a {
+      color:var(--brown);
+      font-family:'Fredoka';
+  }
+  
+  .button{
+      margin-left: 20px;
+      margin-top: 20px;
+      background-color: #74E7D9;
+  }

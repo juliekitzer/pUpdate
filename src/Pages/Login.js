@@ -46,14 +46,30 @@ function Login({ isAuthenticated, setIsAuthenticated, user, setUser }) {
 
     return (
         <div>
-            <h1>Login</h1>
-            <form onSubmit={handleSubmit}>
-                <label>Username:</label>
-                <input type="text" name="username" onChange={(e) => handleChange('username', e.target.value)} />
-                <label>Password:</label>
-                <input type="text" name="password" onChange={(e) => handleChange('password', e.target.value)} />
-                <button type='submit'>Login</button>
-            </form>
+            <center>
+                <div className="tile is-parent-tile is-2 centered">
+                    <article className="tile is-child notification is-primary">
+                        <div>
+                            <h1>Login</h1>
+                            <form onSubmit={handleSubmit}>
+                                <ul>
+                                    <li><label>Username:</label></li>
+                                    <li>
+                                        <input className="input is-rounded is-primary" type="text" placeholder="Username" name="username" onChange={(e) => handleChange('username', e.target.value)} />
+                                    </li>
+                                    <li>
+                                        <label htmlFor="password">Password:</label>
+                                    </li>
+                                    <li>
+                                        <input className="input is-rounded is-primary" type="password" placeholder="Password" id="password" name="password" onChange={(e) => handleChange('password', e.target.value)} />
+                                    </li>
+                                </ul>
+                                <button type='submit' className="button is-light">Login</button>
+                            </form>
+                        </div>
+                    </article>
+                </div>
+            </center>
         </div>
     )
 }

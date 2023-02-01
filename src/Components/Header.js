@@ -1,31 +1,34 @@
 import 'bulma/css/bulma.css';
 import { Link } from 'react-router-dom';
-
-
+import Logo from "../images/logo.png";
+import '../stylesheets/headerStyle.css';
+import '../stylesheets/style.css';
 function Header({ isAuthenticated }) {
     return (
         <div>
-        <nav class="navbar" role="navigation" aria-label="main navigation">
-        <a href="https://bulma.io"><img src="https://cdn.dribbble.com/users/3390157/screenshots/6315498/1_4x.png" width="110" height="58"/></a>
-  <div class="navbar-brand">
+        <nav className="navbar is-tan" role="navigation" aria-label="main navigation">
+        <a href="http://localhost:3000/">
+            <img src={Logo} width="210" height="58" alt="Pupdate logo"/>
+            </a>
+  <div className="navbar-brand">
     
      
-    
+  
 
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+    <a role="button" className="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
     </a>
   </div>
 
-  <div id="navbarBasicExample" class="navbar-menu">
-    <div class="navbar-start">
-      <a class="navbar-item">
+  <div id="navbarBasicExample" className="navbar-menu">
+    <div className="navbar-start">
+      <a className="navbar-item">
       <Link to="/">Home</Link>
       </a>
 
-      <a class="navbar-item">
+      <a className="navbar-item">
       <Link to="/Dashboard">Dashboard</Link>
       </a>
       
@@ -35,13 +38,13 @@ function Header({ isAuthenticated }) {
     {   isAuthenticated ? null :
                 
                
-            <div class="navbar-end">
-            <div class="navbar-item">
-              <div class="buttons">
-                <a class="button is-primary">
+            <div className="navbar-end">
+            <div className="navbar-item">
+              <div className="buttons">
+                <a className="button is-primary">
                   <strong><Link to="/Register">Register</Link></strong>
                 </a>
-                <a class="button is-light">
+                <a className="button is-light">
                 <Link to="/Login">Login</Link>
                 </a>
               </div>
