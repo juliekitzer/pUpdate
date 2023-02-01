@@ -12,11 +12,13 @@ import TabComponent from "../Components/TabComponent";
 import 'bulma/css/bulma.css'
 
 
+
 function Dashboard({ isAuthenticated, setIsAuthenticated, user, setUser }) {
 
     const [dog, setDog] = useState([]);
     const [activities, setActivities] = useState([]);
     const [infoClicked, setInfoClicked] = useState(false);
+    const [dogInfoClicked, setDogInfoClicked] = useState(false);
     const [dogsExist, setDogsExist] = useState(false);
     const [activeTab, setActiveTab] = useState('');
     useEffect(() => {
@@ -48,11 +50,12 @@ function Dashboard({ isAuthenticated, setIsAuthenticated, user, setUser }) {
     }, [dogsExist])
 
 
-
-
-
     function onInfoClick() {
         setInfoClicked(!infoClicked);
+    }
+
+    function onDogInfoClick() {
+        setDogInfoClicked(!dogInfoClicked);
     }
 
     async function getDogsByUser(userid) {
@@ -73,7 +76,6 @@ function Dashboard({ isAuthenticated, setIsAuthenticated, user, setUser }) {
     function handleTabChange(value) {
         setActiveTab(value)
     }
-
 
 
     let tabs
@@ -101,12 +103,12 @@ if (infoClicked) {
     )
 }
 
-let addDog = <button className="button is-primary" onClick={onInfoClick}>Add Dog</button>
-if (infoClicked) {
+let addDog = <button className="button is-primary" onClick={onDogInfoClick}>Add Dog</button>
+if (dogInfoClicked) {
     addDog = (
         <div>
-            <Adddog handleClose={onInfoClick} open={infoClicked} user={user.id} />
-            <button onClick={onInfoClick}>Cancel</button>
+            <Adddog handleClose={onDogInfoClick} open={dogInfoClicked} user={user.id} />
+            <button onClick={onDogInfoClick}>Cancel</button>
         </div>
     )
 }
@@ -128,7 +130,6 @@ activities.forEach(dog => {
 })
 
 
-
 // if (loggedIn) {
 //     (async () => {
 //         const dogs = await getDogsByUser(user.id);
@@ -141,15 +142,17 @@ activities.forEach(dog => {
 return (
     <div>
         <h1 className="title">Welcome, {user.firstname}!</h1>
+        {moreInfo}
         <div className="tabs is-boxed">
+            
             <ul>
                 {tabs}
-
+                
                 <li className={activeTab == 1 ? "is-active" : ""}>
 
                     <a>
                         <span className="icon is-small"><i className="fas fa-music" aria-hidden="true"></i></span>
-                        <span>Add Dog</span>
+                        <span>{addDog}</span>
                     </a>
                 </li>
 
@@ -159,10 +162,9 @@ return (
         <div>
 
             {/* {moreinfo}</div> */}
-            {moreInfo}
-            {addDog}
+            
         </div>
-        {activitiescards}
+        
     </div>
 
 

@@ -24,7 +24,7 @@ function Adddog({ user, handleClose, open }) {
         AdditionalInfo: ""
     })
 
-    async function handleSubmit(e) {
+    async function handleSubmitDog(e) {
         e.preventDefault();
         try {
             let res = await fetch("http://localhost:3005/api/Dog/create", {
@@ -83,7 +83,7 @@ function Adddog({ user, handleClose, open }) {
             <DialogTitle>{ }</DialogTitle>
             <DialogContent>
 
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmitDog}>
 
                     <p>Name:</p>
                     <input className="input is-rounded  is-primary" type="text" placeholder="Rounded input" name="Name" onChange={(e) => handleChange('Name', e.target.value)} />
