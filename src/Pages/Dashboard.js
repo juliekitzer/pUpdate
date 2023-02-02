@@ -78,57 +78,62 @@ function Dashboard({ isAuthenticated, setIsAuthenticated, user, setUser }) {
     }
 
 
-    let tabs
-    console.log("test", activities)
 
-    tabs = activities.map((activity, index) => {
-        console.log("testing again", activity)
-        if (activity.length > 0) {
-            return (
 
-                <TabComponent key={activity.id} tabId={index} activity={activity} dogName={activity[0].Dog.dogname} dogId={activity[0]['Dog'].id} activeTab={activeTab} handleTabChange={handleTabChange}
-                />)
+    let moreInfo = <button className="button is-primary" onClick={onInfoClick}>Add activity</button>
+    if (infoClicked) {
+        moreInfo = (
+            <div>
+                <Modalpopup handleClose={onInfoClick} open={infoClicked} dog={dog} activities={activities} user={user.id} />
+                <button onClick={onInfoClick}>Cancel</button>
+            </div>
+        )
+    }
 
+    let addDog = <button className="button is-primary" onClick={onDogInfoClick}>Add Dog</button>
+    if (dogInfoClicked) {
+        addDog = (
+            <div>
+                <Adddog handleClose={onDogInfoClick} open={dogInfoClicked} user={user.id} />
+                <button onClick={onDogInfoClick}>Cancel</button>
+            </div>
+        )
+    }
+
+    let activitiescards
+    activities.forEach(dog => {
+        if (dog.length > 0) {
+            console.log('dog', dog)
+            if (dog[0].Dog.id == activeTab) {
+                activitiescards = dog.map((activity, index) => {
+                    console.log('loop', index)
+                    return (
+                        <>
+                      
+                            <Activitycard key={activity.id} activity={activity} handleTabChange={handleTabChange} activeTab={activeTab} tabId={activity.dogid}
+                            
+                            />
+                           
+                        </>
+
+                    )})
+            }
         }
     })
+    
 
+let tabs
 
-let moreInfo = <button className="button is-primary" onClick={onInfoClick}>Add activity</button>
-if (infoClicked) {
-    moreInfo = (
-        <div>
-            <Modalpopup handleClose={onInfoClick} open={infoClicked} dog={dog} activities={activities} user={user.id} />
-            <button onClick={onInfoClick}>Cancel</button>
-        </div>
-    )
-}
+tabs = activities.map((activity, index) => {
+    console.log("testing again", activity)
+    if (activity.length > 0) {
+        return (
 
-let addDog = <button className="button is-primary" onClick={onDogInfoClick}>Add Dog</button>
-if (dogInfoClicked) {
-    addDog = (
-        <div>
-            <Adddog handleClose={onDogInfoClick} open={dogInfoClicked} user={user.id} />
-            <button onClick={onDogInfoClick}>Cancel</button>
-        </div>
-    )
-}
+            <TabComponent key={activity.id} tabId={activity[0].Dog.id} activity={activity} dogName={activity[0].Dog.dogname} dogId={activity[0]['Dog'].dogid} activeTab={activeTab} handleTabChange={handleTabChange}
+            />)
 
-let activitiescards;
-activities.forEach(dog => {
-    if (dog.length > 0) {
-        activitiescards = dog.map(function (activity) {
-
-            return (
-                <Activitycard key={activity.id} activity={activity}
-                // DeleteThisActivity={DeleteThisActivity} 
-                // EditThisActivity={EditThisActivity}
-                />
-
-            )
-        })
     }
 })
-
 
 // if (loggedIn) {
 //     (async () => {
@@ -144,27 +149,16 @@ return (
         <h1 className="title">Welcome, {user.firstname}!</h1>
         {moreInfo}
         <div className="tabs is-boxed">
-            
             <ul>
                 {tabs}
-                
                 <li className={activeTab == 1 ? "is-active" : ""}>
-
-                    <a>
-                        <span className="icon is-small"><i className="fas fa-music" aria-hidden="true"></i></span>
-                        <span>{addDog}</span>
-                    </a>
+                    <span>{addDog}</span>
                 </li>
-
             </ul>
-            <p>test</p>
         </div>
+        {activitiescards}
         <div>
-
-            {/* {moreinfo}</div> */}
-            
         </div>
-        
     </div>
 
 

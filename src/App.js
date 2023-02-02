@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import "./index.css";
 import './stylesheets/style.css';
 import 'bulma/css/bulma.min.css'; 
+// import Tabs from './Components/Tabs';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
     }
     return (
         <div>
+            
             <Router>
                 <Header isAuthenticated={isAuthenticated} />
                 {/* //Ternery statement is used instead of if else
@@ -31,6 +33,7 @@ function App() {
                     user={user}
                     setUser={setUserState}
                 />
+                {/* <Tabs /> */}
             </Router>
             <Footer />
         </div>
