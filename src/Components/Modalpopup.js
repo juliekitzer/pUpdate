@@ -4,7 +4,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import 'bulma/css/bulma.css';
-function Modalpopup({ handleClose, open, dog, user, activities }) {
+function Modalpopup({ handleClose, open, dog, user, activities, rerender, handleRerender, handleSetActivities, handleGetDogs}) {
     const [newActivity, setNewActivity] = useState({
         Activity: "",
         Date: "",
@@ -12,6 +12,7 @@ function Modalpopup({ handleClose, open, dog, user, activities }) {
         Description: "",
         dogid: ""
     })
+    
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -29,8 +30,10 @@ function Modalpopup({ handleClose, open, dog, user, activities }) {
                 }),
             });
             let resJson = await res;
-
+            // handleSetActivities([])
+            // handleGetDogs()
             handleClose()
+
 
         } catch (err) {
             console.log(err);

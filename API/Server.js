@@ -77,6 +77,8 @@ app.get('/api/Activity', async function (req, res) {
 app.get('/api/Activity/:dogid', async function (req, res) {
     let { dogid } = req.params;
     let results = await Activity.findAll({
+        order:[["date", "DESC"],["time","DESC"]],
+        
         include: [{
             model: Dog,
             required: true,
@@ -96,6 +98,7 @@ app.post('/api/Activity/create', async function (req, res) {
         time: time,
         description: description,
     })
+    
     res.json({ results });
 })
 
@@ -166,6 +169,7 @@ app.post('/api/JoinTable/create', async function (req, res) {
 app.get('/api/Dog/:userid', async function (req, res) {
     let { userid } = req.params;
     let results = await JoinTable.findAll({
+        order:[["createdAt", "ASC"]],
         where: {
             userid: userid
         },

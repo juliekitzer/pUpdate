@@ -6,7 +6,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import 'bulma/css/bulma.css';
 import 'bulma/css/bulma.css';
 import userEvent from '@testing-library/user-event';
-function Adddog({ user, handleClose, open }) {
+function Adddog({ user, handleClose, open, getDogsByUser, handleSetDogs }) {
     const [formInfo, setFormInfo] = useState({
         Name: "",
         Weight: null,
@@ -49,13 +49,32 @@ function Adddog({ user, handleClose, open }) {
             });
             let resJson = await res.json();
             await attachDogToUser(resJson.results.id)
-
+            await createFirstPost(resJson.results.id)
+            await handleSetDogs([])
+            console.log("await over")
+            // getDogsByUser(user)
             handleClose()
 
         } catch (err) {
             // console.log(err);
         }
     };
+
+    async function createFirstPost(dogid){
+        let res = await fetch ("http://localhost:3005/api/activity/create", {
+            method:"POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                "activity": `${formInfo.Name} was born on ${formInfo.Birthday}`,
+                "date":  Date(),
+                "time": "12:56:00",
+                "description": "",
+                "dogid": dogid,
+                "userid": user
+        }),
+    });
+    
+    }
 
     async function attachDogToUser(dogid) {
         // console.log('arrived at attached user',dogid)

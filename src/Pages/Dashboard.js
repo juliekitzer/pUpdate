@@ -21,12 +21,14 @@ function Dashboard({ isAuthenticated, setIsAuthenticated, user, setUser }) {
     const [dogInfoClicked, setDogInfoClicked] = useState(false);
     const [dogsExist, setDogsExist] = useState(false);
     const [activeTab, setActiveTab] = useState('');
+    const [rerender, setRerender] = useState(false);
     useEffect(() => {
         if (isAuthenticated) {
             (async () => {
                 const dogs = await getDogsByUser(user.id)
-                setDog(dogs)
+                // setDog(dogs)
                 setDogsExist(true)
+                
                 // console.log(dogs)
             })();
 
@@ -37,18 +39,43 @@ function Dashboard({ isAuthenticated, setIsAuthenticated, user, setUser }) {
 
     // let dogList = dog.map
 
+    useEffect(() => { }, [rerender])
+
     useEffect(() => {
         if (dogsExist == true) {
             // console.log("second condition");
-            dog.forEach(doggy => {
-                // console.log("tesinggggg", doggy.dogname);
-
-                getActivitesByDog(doggy.dogid);
-                // setActivities(activityList)
-            })
+            setActiveTab(dog[0].dogid)
+           
+            handleGetDogs()
         }
-    }, [dogsExist])
+    }, [dogsExist,dog])
 
+    // async function getNewActivity(){
+    //     let res = await 
+    // }
+
+       async function handleSetDogs(value){
+            // setDog(value)
+            await getDogsByUser(user.id)
+            // console.log("tester", dog)
+            // console.log('arrived at handleSetDogs')
+        }
+
+
+    function handleGetDogs() {
+        setActivities([])
+        console.log(dog)
+        dog.forEach(doggy => {
+            // console.log("tesinggggg", doggy.dogname);
+
+            getActivitesByDog(doggy.dogid);
+            // setActivities(activityList)
+        })
+    }
+
+    function handleSetActivities (value) {
+        // setActivities(value)
+    }
 
     function onInfoClick() {
         setInfoClicked(!infoClicked);
@@ -61,9 +88,11 @@ function Dashboard({ isAuthenticated, setIsAuthenticated, user, setUser }) {
     async function getDogsByUser(userid) {
         let res = await fetch(`http://localhost:3005/api/Dog/${userid}`)
         res = await res.json()
-            //setDog(res)
+        console.log("this is the res",res)
+            setDog(res)
+            
             ;
-        return res
+       
     }
 
     async function getActivitesByDog(dogid) {
@@ -77,6 +106,10 @@ function Dashboard({ isAuthenticated, setIsAuthenticated, user, setUser }) {
         setActiveTab(value)
     }
 
+    function handleRerender(value) {
+        setRerender(value)
+    }
+
 
 
 
@@ -84,17 +117,18 @@ function Dashboard({ isAuthenticated, setIsAuthenticated, user, setUser }) {
     if (infoClicked) {
         moreInfo = (
             <div>
-                <Modalpopup handleClose={onInfoClick} open={infoClicked} dog={dog} activities={activities} user={user.id} />
+                <Modalpopup handleGetDogs={handleGetDogs} handleSetActivities={handleSetActivities} handleRerender={handleRerender} rerender={rerender} handleClose={onInfoClick} open={infoClicked} dog={dog} user={user.id} />
                 <button onClick={onInfoClick}>Cancel</button>
             </div>
         )
     }
 
+
     let addDog = <button className="button is-primary" onClick={onDogInfoClick}>Add Dog</button>
     if (dogInfoClicked) {
         addDog = (
             <div>
-                <Adddog handleClose={onDogInfoClick} open={dogInfoClicked} user={user.id} />
+                <Adddog handleClose={onDogInfoClick} open={dogInfoClicked} user={user.id} handleSetDogs={handleSetDogs} getDogByUser={getDogsByUser} dog={dog}/>
                 <button onClick={onDogInfoClick}>Cancel</button>
             </div>
         )
@@ -103,18 +137,17 @@ function Dashboard({ isAuthenticated, setIsAuthenticated, user, setUser }) {
     let activitiescards
     activities.forEach(dog => {
         if (dog.length > 0) {
-            console.log('dog', dog)
             if (dog[0].Dog.id == activeTab) {
                 activitiescards = dog.map((activity, index) => {
-                    console.log('loop', index)
+                    // console.log('loop', index)
                     return (
-                        <>
+                        <div>
                       
                             <Activitycard key={activity.id} activity={activity} handleTabChange={handleTabChange} activeTab={activeTab} tabId={activity.dogid}
                             
                             />
                            
-                        </>
+                        </div>
 
                     )})
             }
@@ -123,16 +156,15 @@ function Dashboard({ isAuthenticated, setIsAuthenticated, user, setUser }) {
     
 
 let tabs
-
+console.log("activities",activities)
 tabs = activities.map((activity, index) => {
-    console.log("testing again", activity)
-    if (activity.length > 0) {
+   
+    if(activity.length > 0) {
         return (
-
             <TabComponent key={activity.id} tabId={activity[0].Dog.id} activity={activity} dogName={activity[0].Dog.dogname} dogId={activity[0]['Dog'].dogid} activeTab={activeTab} handleTabChange={handleTabChange}
             />)
-
-    }
+        }
+    
 })
 
 // if (loggedIn) {
