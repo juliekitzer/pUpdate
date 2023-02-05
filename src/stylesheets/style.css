@@ -33,19 +33,21 @@
   }
 body a{
   color:var(--brown);
-      font-family:'Fredoka';}
+      font-family:'Fredoka';
+      font-size: 20px;
+   }
 
-body {
-    background-color: var(--mint);
-    color:var(--brown);
-    font-family: comfortaa;
-}
+   body a:hover{
+    color:#74E7D9;
+   }
 
 
-.DogPhotoContainer {
+
+.ActivityFeed {
     display: flex;
     flex-wrap: wrap;
    justify-content:center;
+   padding-left: 10px;
    
 }
 
@@ -183,4 +185,16 @@ body {
     justify-content: center;
 
   }
+
+  .tabs.is-boxed a:hover {
+    background-color: #74E7D9;
+    border-bottom-color: #74E7D9;
+}
+
+.tabHeading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+}
 

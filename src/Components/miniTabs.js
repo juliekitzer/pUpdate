@@ -5,12 +5,51 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 
-{
+function MiniTabs() {
   const [value, setValue] = React.useState('1');
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+
+
+
+
+  let activitiescards
+  activities.forEach(dog => {
+      if (dog.length > 0) {
+          if (dog[0].Dog.id == activeTab) {
+              activitiescards = dog.map((activity, index) => {
+                  // console.log('loop', index)
+                  return (
+                      <div>
+
+                          <Activitycard key={activity.id} activity={activity} handleTabChange={handleTabChange} activeTab={activeTab} tabId={activity.dogid} handleGetActivities={handleGetActivities} handleSetActivities={handleSetActivities}
+
+                          />
+
+                      </div>
+
+                  )
+              })
+          }
+      }
+  })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   return (
     <Box sx={{ width: '100%', typography: 'body1' }}>
@@ -30,4 +69,4 @@ import TabPanel from '@mui/lab/TabPanel';
   );
 }
 
-export default function LabTabs() 
+export default  MiniTabs;

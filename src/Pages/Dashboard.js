@@ -11,6 +11,7 @@ import TabComponent from "../Components/TabComponent";
 import Dogname from "../Components/Dogname";
 import "../stylesheets/style.css";
 import 'bulma/css/bulma.css'
+import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 
 
 
@@ -117,7 +118,7 @@ function Dashboard({ isAuthenticated, setIsAuthenticated, user, setUser}) {
 
 
 
-    let moreInfo = <button className="button is-primary" onClick={onInfoClick}>Add activity</button>
+    let moreInfo = <a onClick={onInfoClick} className="Addactivity" ><AddCircleRoundedIcon sx={{fontSize: 40 }}/></a>
     if (infoClicked) {
         moreInfo = (
             <div>
@@ -205,13 +206,16 @@ if (dog.length > 0) {
                     </li>
                 </ul>
             </div>
+          
             <div className="ActivityFeed">
             
-           <h1 className="title">{names}</h1> {moreInfo}
+            <div>
+            
+          <div className="tabHeading"> <h1 className="title">{names}</h1> {moreInfo} </div>
            
            
             {activitiescards}
-        
+            </div>
             </div>
         </div>
 
