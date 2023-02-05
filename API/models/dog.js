@@ -32,7 +32,8 @@ module.exports = (sequelize, DataTypes) => {
     allergies: DataTypes.STRING,
     sensitivities: DataTypes.STRING,
     medication: DataTypes.STRING,
-    additional_info: DataTypes.STRING
+    additional_info: DataTypes.STRING,
+    Profilephoto: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Dog',

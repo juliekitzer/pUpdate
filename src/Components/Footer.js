@@ -1,4 +1,5 @@
 import 'bulma/css/bulma.css';
+import '../stylesheets/style.css';
 
 function Footer() {
     return (

@@ -1,25 +1,37 @@
+import React, { useEffect } from 'react';
 import { useState } from 'react';
+import "../stylesheets/style.css";
 import Editactivity from './Editactivity';
 import Deleteactivity from "./Deleteactivity";
 import { SendTimeExtension } from '@mui/icons-material';
-function Activitycard({ activity, DeleteThisactivity, EditThisactivity, handleTabChange, activeTab, tabId }) {
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { Box } from '@mui/material';
+function Activitycard({ activity, handleTabChange, activeTab, tabId, handleSetActivities, handleGetActivities}) {
 
     const [editClicked, setEditClicked] = useState(false);
-    const [deleteClicked, setDeleteClicked] = useState(false);
+    // const [deleteClicked, setDeleteClicked] = useState(false);
+    const [userFirstName, setUserFirstName] = useState("");
+    
     // function onInfoClick() {
     //     setInfoClicked(!infoClicked);
     // }
     const date = new Date(
         activity.date
     )
+    const newdate = new Date (
+        "2023-10-10"
+    )
+    console.log(newdate.toDateString())
+    console.log(date.toDateString())
     // const time = new Date(
     //     activity.time)
     // time.getTime
 
 
-    function onDeleteClick() {
-        DeleteThisactivity(activity.id);
-    }
+    // function onDeleteClick() {
+    //     DeleteThisactivity(activity.id);
+    // }
 
     function onEditClick() {
         setEditClicked(!editClicked);
@@ -34,26 +46,41 @@ function Activitycard({ activity, DeleteThisactivity, EditThisactivity, handleTa
     //     )
     // }
 
-    let deleteArea = <button onClick={onDeleteClick} className="button is-small is-primary"> Remove </button>
-    if (deleteClicked) {
-        deleteArea = (<div>
-            <Deleteactivity activity={activity} DeleteThisactivity={DeleteThisactivity} />
-            <button onClick={onDeleteClick}>Cancel</button>
-        </div>)
-    }
+    // let deleteArea = <button  onClick={onDeleteClick} className="button is-small is-primary"> <DeleteIcon/> </button>
+    // if (deleteClicked) {
+    //     deleteArea = (<div>
+    //         <Deleteactivity activity={activity}/>
+    //         <button onClick={onDeleteClick}>Cancel</button>
+    //     </div>)
+    // }
 
 
-    let editArea = <button onClick={onEditClick} className="button is-small is-primary is-light"> Edit </button>
+    let editArea = <button onClick={onEditClick} className="button is-small is-primary is-light"> <EditIcon /> </button>
     if (editClicked) {
         editArea = (<div>
-            <Editactivity activity={activity} EditThisactivity={EditThisactivity} />
+            <Editactivity activity={activity} editClicked={editClicked}onEditClick={onEditClick} dogid={activity.dogid} userid={activity.userid} handleGetActivities={handleGetActivities} handleSetActivities={handleSetActivities}/>
             <button onClick={onEditClick}>Cancel</button>
         </div>)
     }
+async function getUserFirstName(userid) {
+    let res = await fetch(`http://localhost:3005/api/user/${userid}`)
+    res = await res.json()
+    setUserFirstName(res.firstname)
+
+        ;
+
+}
+
+useEffect(() => {
+    getUserFirstName(activity.userid)
+}, [])
+
+
+
     return (
         <div>
             <h5>{date.toDateString()}</h5>
-            <div class="box">
+            <div id="Rounded"class="box">
                 <article class="media">
                     <div class="media-left">
                     </div>
@@ -64,12 +91,13 @@ function Activitycard({ activity, DeleteThisactivity, EditThisactivity, handleTa
                                 <br />
                                 {activity.description}
                             </p>
+                            <p>Created by {userFirstName}</p>
                         </div>
                         <nav class="level is-mobile">
                             <div class="level-left">
 
                                 {editArea}
-                                {deleteArea}
+                                {/* {deleteArea} */}
                             </div>
                         </nav>
                     </div>

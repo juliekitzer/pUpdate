@@ -7,18 +7,180 @@
     --tan: #FFE8D6;
     --brown: #cb997e;
   }
+  .title {color:#ffffff}
+  .tabs.is-boxed a {
   
-  .navbar .is-tan{
-      background-color:var(--tan);
-  }
-  
-  a {
-      color:var(--brown);
-      font-family:'Fredoka';
-  }
-  
+    border-radius: 87px 87px 0 0;
+    
+}
   .button{
       margin-left: 20px;
       margin-top: 20px;
-      background-color: #74E7D9;
+      background-color: blue;
   }
+  #Rounded .box {
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 10%), 0 0 0 1px rgb(10 10 10 / 2%);
+    color: #4a4a4a;
+    display: block;
+    padding: 1.25rem;
+}
+  body .navbar {
+    background-color:var(--tan);
+    color:var(--brown);
+    font-family:'Fredoka';
+  }
+body a{
+  color:var(--brown);
+      font-family:'Fredoka';}
+
+body {
+    background-color: var(--mint);
+    color:var(--brown);
+    font-family: comfortaa;
+}
+
+
+.DogPhotoContainer {
+    display: flex;
+    flex-wrap: wrap;
+   justify-content:center;
+   
+}
+
+.DogPhoto {
+    width: 65px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px
+}
+
+.DogPhotoTab {
+    width: 55px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top-left-radius: 65px;
+    border-top-right-radius: 65px;
+}
+
+.is-small .is-primary button {
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 2px;
+  padding-right: 2px;
+
+}
+
+.tabs {
+  border-top-left-radius: 65px;
+    border-top-right-radius: 65px;
+
+}
+.tabs.is-boxed li.is-active a {
+    background-color: var(--brown);
+    border-color: var(--brown);
+    border-bottom-color: transparent!important;
+    border-top-left-radius: 65px;
+    border-top-right-radius: 65px;
+}
+.tabs.is-boxed li.is-active a {
+    background-color: var(--brown);
+    border-color: #dbdbdb;
+    border-bottom-color: transparent !important;
+    border-top-left-radius: 65px;
+    border-top-right-radius: 65px;
+}
+
+.tabs.is-boxed li.is-inactive a {
+  border: 1px solid transparent;
+  border-top-left-radius: 65px;
+    border-top-right-radius: 65px;
+}
+.tabs.is-boxed li a {
+  border-radius: 87px 87px 0 0;
+  
+  border-top-left-radius: 65px;
+    border-top-right-radius: 65px;
+}
+.tabs.is-boxed li.is-inactive a{
+  border: 1px solid transparent;
+  
+  border-top-left-radius: 65px;
+    border-top-right-radius: 65px;
+}
+.tabs li.is-inactive a {
+  align-items: center;
+  border-bottom-color: #dbdbdb;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  color: #4a4a4a;
+  display: flex;
+  justify-content: center;
+  margin-bottom: -1px;
+  padding: 0.5em 1em;
+  vertical-align: top;
+  border-top-left-radius: 65px;
+    border-top-right-radius: 65px;
+}
+
+.tabs li.is-inactive a {
+  align-items: center;
+  border-bottom-color: #dbdbdb;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  color: #4a4a4a;
+  display: flex;
+  justify-content: center;
+  margin-bottom: -1px;
+  padding: 0.5em 1em;
+  vertical-align: top;
+  border-top-left-radius: 65px;
+    border-top-right-radius: 65px;
+}
+
+/* .isActive{
+  background-color:red;
+  display:block;
+  width:1000px;
+}
+.isInactive {
+  background-color: blue;
+  display:none;
+  width:1000px
+}
+ */
+
+ .navbar-item.is-mega {
+  position: static;
+ }
+  .is-mega-menu-title {
+    margin-bottom: 0;
+    padding: .375rem 1rem;
+  }
+
+  .spaceBehind {
+    background-color: #CBF6F1;
+  }
+
+  .ActivityFeed {
+    background-color: #fefefe;
+  }
+
+  .box {
+    width: 550px;
+   margin: 20px 20px 20px 20px;
+  }
+  .Circle {
+   
+    background-color: #74E7D9;
+    border-radius: 100%;
+    width:72px;
+    height:72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+  }
+

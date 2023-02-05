@@ -1,6 +1,8 @@
 import { useState } from "react";
+import '../stylesheets/style.css';
 import "../index.css";
 
+import 'bulma/css/bulma.css'
 function Tabs() {
 
     const [toggleState, setToggleState] = useState(1);
@@ -9,7 +11,7 @@ function Tabs() {
     }
     return (
         <div className="container">
-            <div className="bloc-tabs">
+            <div id="tabs" className="bloc-tabs">
                 <div
                 className={toggleState === 1 ? "tabs active-tabs" :"tabs"}
                 onClick={()=>toggleTab(1)}

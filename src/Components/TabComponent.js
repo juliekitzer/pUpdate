@@ -1,8 +1,10 @@
 import React from "react";
+import '../stylesheets/style.css';
 import 'bulma/css/bulma.css'
 import Activitycard from "./Activitycard";
 
-function TabComponent({ activity, dogName, activeTab, handleTabChange, dogId, tabId }) {
+
+function TabComponent({ activity, dogName, activeTab, handleTabChange, dogId, tabId, DogPhoto }) {
 
     // console.log(dogId)
 
@@ -24,17 +26,24 @@ function TabComponent({ activity, dogName, activeTab, handleTabChange, dogId, ta
     //         )
     //     })
     // }
+
+
+
     return (
         <div>
-        <li className={activeTab == tabId ? "is-active" : ""} onClick={() => handleTabChange(tabId)} value={tabId}>
+            <li className={activeTab == tabId ? "is-active" : ""} onClick={() => handleTabChange(tabId)} value={tabId}>
+         
+                    <a className="title media-left">
+                        <div className="Circle"><img src={DogPhoto} className="DogPhotoTab"></img></div>
 
-            <a className="title media-left">
-                <span>{dogName}</span>
-            </a>
-        </li>
-        {/* {activitiescards} */}
+                    </a>
                
-</div>
+            </li>
+
+
+            {/* {activitiescards} */}
+
+        </div>
     )
 }
 

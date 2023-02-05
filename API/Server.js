@@ -6,7 +6,8 @@ const cors = require('cors');
 const bcrypt = require('bcrypt');
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-const { User, JoinTable, Dog, Activity } = require('./models')
+const { User, JoinTable, Dog, Activity } = require('./models');
+const { DoorSlidingSharp } = require('@mui/icons-material');
 app.use(
     cors({
         origin: 'http://localhost:3000',
@@ -77,12 +78,12 @@ app.get('/api/Activity', async function (req, res) {
 app.get('/api/Activity/:dogid', async function (req, res) {
     let { dogid } = req.params;
     let results = await Activity.findAll({
-        order:[["date", "DESC"],["time","DESC"]],
-        
+        order: [["date", "DESC"], ["time", "DESC"]],
+
         include: [{
             model: Dog,
             required: true,
-            where: {id:dogid}
+            where: { id: dogid }
         }]
     });
     res.json(results);
@@ -98,7 +99,7 @@ app.post('/api/Activity/create', async function (req, res) {
         time: time,
         description: description,
     })
-    
+
     res.json({ results });
 })
 
@@ -110,7 +111,7 @@ app.get('/api/User', async function (req, res) {
 app.get('/api/User/:id', async function (req, res) {
     let { id } = req.params;
     let results = await User.findByPk(id);
-    req.json({ results });
+    res.json(results);
 })
 
 app.post('/api/User/create', async function (req, res) {
@@ -127,6 +128,25 @@ app.post('/api/User/create', async function (req, res) {
     res.json({ results });
 })
 
+app.put('/api/Activity/update', async function (req, res) {
+    const { activityid, dogid, userid, activity, date, time, description } = req.body;
+    let results = await Activity.update({
+        dogid: dogid,
+        userid: userid,
+        activity: activity,
+        date: date,
+        time: time,
+        description: description,
+    },{
+        where: {
+            id:activityid
+        }
+    })
+    res.json({ results });
+})
+
+
+
 // app.get('/api/Dog/id/:dogid', async function (req, res) {
 //     const {dogid} = req.params;
 //     let results = await Dog.findOne({
@@ -136,8 +156,9 @@ app.post('/api/User/create', async function (req, res) {
 // })
 
 app.post('/api/Dog/create', async function (req, res) {
-    const { dogname, weight, breed, birthday, gotchaday, chipid, rabiestag, gender, spayedorneutered, food, allergies, sensitivities, medication, additional_info } = req.body;
+    const { dogname, weight, breed, birthday, gotchaday, chipid, rabiestag, gender, spayedorneutered, food, allergies, sensitivities, medication, additional_info, Profilephoto } = req.body;
     let results = await Dog.create({
+        Profilephoto: Profilephoto,
         dogname: dogname,
         weight: weight,
         breed: breed,
@@ -153,7 +174,7 @@ app.post('/api/Dog/create', async function (req, res) {
         medication: medication,
         additional_info: additional_info
     })
-    res.json({ results} );
+    res.json({ results });
 })
 
 
@@ -169,14 +190,24 @@ app.post('/api/JoinTable/create', async function (req, res) {
 app.get('/api/Dog/:userid', async function (req, res) {
     let { userid } = req.params;
     let results = await JoinTable.findAll({
-        order:[["createdAt", "ASC"]],
+        order: [["createdAt", "ASC"]],
         where: {
             userid: userid
         },
         include: Dog
     })
-   res.json(results);
+    res.json(results);
 });
+
+app.get('/api/dog/delete/:id', async function (req, res) {
+    const { id } = req.params;
+    let results = await Dog.destroy({
+        where: {
+            id
+        }
+    })
+    res.json({ results });
+})
 
 
 app.listen(portNumber, function (req, res) {

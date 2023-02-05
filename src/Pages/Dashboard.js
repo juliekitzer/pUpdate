@@ -1,6 +1,5 @@
 import React, { useDebugValue, useEffect, useState } from "react";
 import Activitycard from "../Components/Activitycard";
-import Addnewactivity from "../Components/Addnewactivity";
 import Modalpopup from "../Components/Modalpopup";
 import Adddog from "../Components/Adddog";
 import InputLabel from '@mui/material/InputLabel';
@@ -9,11 +8,13 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
 import TabComponent from "../Components/TabComponent";
+import Dogname from "../Components/Dogname";
+import "../stylesheets/style.css";
 import 'bulma/css/bulma.css'
 
 
 
-function Dashboard({ isAuthenticated, setIsAuthenticated, user, setUser }) {
+function Dashboard({ isAuthenticated, setIsAuthenticated, user, setUser}) {
 
     const [dog, setDog] = useState([]);
     const [activities, setActivities] = useState([]);
@@ -28,7 +29,7 @@ function Dashboard({ isAuthenticated, setIsAuthenticated, user, setUser }) {
                 const dogs = await getDogsByUser(user.id)
                 // setDog(dogs)
                 setDogsExist(true)
-                
+
                 // console.log(dogs)
             })();
 
@@ -45,24 +46,26 @@ function Dashboard({ isAuthenticated, setIsAuthenticated, user, setUser }) {
         if (dogsExist == true) {
             // console.log("second condition");
             setActiveTab(dog[0].dogid)
-           
-            handleGetDogs()
+
+            handleGetActivities()
         }
-    }, [dogsExist,dog])
+    }, [dogsExist, dog])
+
+    
 
     // async function getNewActivity(){
     //     let res = await 
     // }
 
-       async function handleSetDogs(value){
-            // setDog(value)
-            await getDogsByUser(user.id)
-            // console.log("tester", dog)
-            // console.log('arrived at handleSetDogs')
-        }
+    async function handleSetDogs(value) {
+        // setDog(value)
+        await getDogsByUser(user.id)
+        // console.log("tester", dog)
+        // console.log('arrived at handleSetDogs')
+    }
 
 
-    function handleGetDogs() {
+    function handleGetActivities() {
         setActivities([])
         console.log(dog)
         dog.forEach(doggy => {
@@ -73,8 +76,8 @@ function Dashboard({ isAuthenticated, setIsAuthenticated, user, setUser }) {
         })
     }
 
-    function handleSetActivities (value) {
-        // setActivities(value)
+    function handleSetActivities(value) {
+        setActivities(value)
     }
 
     function onInfoClick() {
@@ -88,11 +91,11 @@ function Dashboard({ isAuthenticated, setIsAuthenticated, user, setUser }) {
     async function getDogsByUser(userid) {
         let res = await fetch(`http://localhost:3005/api/Dog/${userid}`)
         res = await res.json()
-        console.log("this is the res",res)
-            setDog(res)
-            
+        console.log("this is the res", res)
+        setDog(res)
+
             ;
-       
+
     }
 
     async function getActivitesByDog(dogid) {
@@ -110,6 +113,7 @@ function Dashboard({ isAuthenticated, setIsAuthenticated, user, setUser }) {
         setRerender(value)
     }
 
+    
 
 
 
@@ -117,7 +121,7 @@ function Dashboard({ isAuthenticated, setIsAuthenticated, user, setUser }) {
     if (infoClicked) {
         moreInfo = (
             <div>
-                <Modalpopup handleGetDogs={handleGetDogs} handleSetActivities={handleSetActivities} handleRerender={handleRerender} rerender={rerender} handleClose={onInfoClick} open={infoClicked} dog={dog} user={user.id} />
+                <Modalpopup handleGetActivities={handleGetActivities} handleSetActivities={handleSetActivities} handleRerender={handleRerender} rerender={rerender} handleClose={onInfoClick} open={infoClicked} dog={dog} user={user.id} />
                 <button onClick={onInfoClick}>Cancel</button>
             </div>
         )
@@ -128,7 +132,7 @@ function Dashboard({ isAuthenticated, setIsAuthenticated, user, setUser }) {
     if (dogInfoClicked) {
         addDog = (
             <div>
-                <Adddog handleClose={onDogInfoClick} open={dogInfoClicked} user={user.id} handleSetDogs={handleSetDogs} getDogByUser={getDogsByUser} dog={dog}/>
+                <Adddog handleClose={onDogInfoClick} open={dogInfoClicked} user={user.id} handleSetDogs={handleSetDogs} getDogByUser={getDogsByUser} dog={dog} />
                 <button onClick={onDogInfoClick}>Cancel</button>
             </div>
         )
@@ -142,59 +146,77 @@ function Dashboard({ isAuthenticated, setIsAuthenticated, user, setUser }) {
                     // console.log('loop', index)
                     return (
                         <div>
-                      
-                            <Activitycard key={activity.id} activity={activity} handleTabChange={handleTabChange} activeTab={activeTab} tabId={activity.dogid}
-                            
+
+                            <Activitycard key={activity.id} activity={activity} handleTabChange={handleTabChange} activeTab={activeTab} tabId={activity.dogid} handleGetActivities={handleGetActivities} handleSetActivities={handleSetActivities}
+
                             />
-                           
+
                         </div>
 
-                    )})
+                    )
+                })
             }
         }
     })
-    
 
-let tabs
-console.log("activities",activities)
-tabs = activities.map((activity, index) => {
-   
-    if(activity.length > 0) {
-        return (
-            <TabComponent key={activity.id} tabId={activity[0].Dog.id} activity={activity} dogName={activity[0].Dog.dogname} dogId={activity[0]['Dog'].dogid} activeTab={activeTab} handleTabChange={handleTabChange}
-            />)
+let names 
+if (dog.length > 0) {
+    names = dog.map((doggy, index)=>{
+        return(
+            <div>
+                <Dogname doggy={doggy["Dog"].dogname} dogid={doggy.dogid} activeTab={activeTab}/>
+            </div>
+        )
+    })
+}
+
+
+
+    let tabs
+    console.log("activities", activities)
+    tabs = activities.map((activity, index) => {
+
+        if (activity.length > 0) {
+            return (
+                <TabComponent key={activity.id} tabId={activity[0].Dog.id} activity={activity} dogName={activity[0].Dog.dogname} dogId={activity[0]['Dog'].dogid} activeTab={activeTab} DogPhoto={activity[0].Dog.Profilephoto}handleTabChange={handleTabChange}
+                />)
         }
-    
-})
 
-// if (loggedIn) {
-//     (async () => {
-//         const dogs = await getDogsByUser(user.id);
-//         const activities = await getActivitesByDog(dog.id);
-//         setDog(dogs)
-//     })();
+    })
 
-// }
+    // if (loggedIn) {
+    //     (async () => {
+    //         const dogs = await getDogsByUser(user.id);
+    //         const activities = await getActivitesByDog(dog.id);
+    //         setDog(dogs)
+    //     })();
 
-return (
-    <div>
-        <h1 className="title">Welcome, {user.firstname}!</h1>
-        {moreInfo}
-        <div className="tabs is-boxed">
-            <ul>
-                {tabs}
-                <li className={activeTab == 1 ? "is-active" : ""}>
-                    <span>{addDog}</span>
-                </li>
-            </ul>
+    // }
+
+    return (
+        <div className="spaceBehind">
+            <h1 className="title">Welcome, {user.firstname}!</h1>
+      
+            <div className="tabs is-boxed" style={{marginBottom:"0px"}}>
+                <ul >
+                    {tabs}
+                    <li className={activeTab == 1 ? "is-active" : ""}>
+                        <span>{addDog}</span>
+                    </li>
+                </ul>
+            </div>
+            <div className="ActivityFeed">
+            
+           <h1 className="title">{names}</h1> {moreInfo}
+           
+           
+            {activitiescards}
+        
+            </div>
         </div>
-        {activitiescards}
-        <div>
-        </div>
-    </div>
 
 
-)
+    )
 
 }
 export default Dashboard;

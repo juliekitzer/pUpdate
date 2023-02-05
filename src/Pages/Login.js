@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import "../stylesheets/style.css";
+import "../stylesheets/loginStyle.css";
 
 
 function Login({ isAuthenticated, setIsAuthenticated, user, setUser }) {
@@ -45,9 +47,9 @@ function Login({ isAuthenticated, setIsAuthenticated, user, setUser }) {
     }
 
     return (
-        <div>
+        <div class="login">
             <center>
-                <div className="tile is-parent-tile is-2 centered">
+                <div className="tile is-parent-tile is-4 centered">
                     <article className="tile is-child notification is-primary">
                         <div>
                             <h1>Login</h1>
