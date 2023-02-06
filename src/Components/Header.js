@@ -34,7 +34,7 @@ setMenuIsActive (!menuIsActive)
  >
     <div className="navbar-start">
       <a className="navbar-item" onClick={(e)=>handleMenuChange()}>
-      <Link to="/">Home</Link>
+      <Link to="/login">Home</Link>
       </a>
 
       <a className="navbar-item"onClick={(e)=>handleMenuChange()}>
@@ -51,7 +51,7 @@ setMenuIsActive (!menuIsActive)
             <div className="navbar-item">
               <div className="buttons">
                 <a className="button is-primary" onClick={(e)=>handleMenuChange()}>
-                  <strong><Link to="/Register">Register</Link></strong>
+                 <Link to="/Register" style={{color:"white"}}>Register</Link>
                 </a>
                 <a className="button is-light" onClick={(e)=>handleMenuChange()}>
                 <Link to="/Login">Login</Link>

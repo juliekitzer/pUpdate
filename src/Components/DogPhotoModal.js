@@ -1,9 +1,10 @@
 import React from 'react';
+import "../stylesheets/style.css";
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
-import "../stylesheets/style.css";
-import '../stylesheets/style.css';
+
+import CloseIcon from '@mui/icons-material/Close';
 
 function DogPhotoModal({ handleSetDogPhoto }) {
     const [open, setOpen] = React.useState(false);
@@ -29,7 +30,10 @@ function DogPhotoModal({ handleSetDogPhoto }) {
 
     return (
         <React.Fragment>
-            <Button onClick={handleOpen}>Chose your pet profile photo</Button>
+            <Button onClick={handleOpen}>
+                <div className="profilePhotoHeading">
+                    <img src="https://www.linkpicture.com/q/dog_8.png" style={{width:"80px"}}/><br/>
+                    <p>Click to choose a pet profile photo!</p></div></Button>
             <Modal
                 hideBackdrop
                 open={open}
@@ -39,6 +43,10 @@ function DogPhotoModal({ handleSetDogPhoto }) {
             >
                 <Box sx={{ ...style, width: 500 }}>
                     <center><h2 id="child-modal-title">Chose your pet profile photo</h2></center>
+                    
+                   
+
+
                     <div id="child-modal-description" className="DogPhotoContainer">
                         <img className="DogPhoto"   onClick={(e) => {handleSetDogPhoto("https://www.linkpicture.com/q/001-bulldog.png"); handleClose()}} src="https://www.linkpicture.com/q/001-bulldog.png"></img>
                         <img className="DogPhoto" onClick={(e) => {handleSetDogPhoto("https://www.linkpicture.com/q/002-english-mastiff.png"); handleClose()}} src="https://www.linkpicture.com/q/002-english-mastiff.png"></img>
@@ -106,9 +114,9 @@ function DogPhotoModal({ handleSetDogPhoto }) {
 
                         <img className="DogPhoto" onClick={(e) => {handleSetDogPhoto("https://www.linkpicture.com/q/turkish-angora.png"); handleClose()}} src="https://www.linkpicture.com/q/turkish-angora.png"></img>
 
-
+                        <CloseIcon style={{color:"#74E7D9"}} className="dogPhotoModal" onClick={handleClose} />
                     </div>
-                    <center><Button onClick={handleClose}>Close</Button></center>
+                    
                 </Box>
             </Modal>
         </React.Fragment>

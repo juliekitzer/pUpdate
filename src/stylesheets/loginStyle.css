@@ -6,3 +6,8 @@
     .title {color:#ffffff}
 
 
+.Registration {
+display: flex;
+justify-content: center;
+padding-top: 70px;
+}

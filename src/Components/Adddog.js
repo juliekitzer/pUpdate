@@ -121,33 +121,33 @@ function Adddog({ user, handleClose, open, getDogsByUser, handleSetDogs }) {
 
     return (
         <div>
-            <Button onClick={open}>Open modal</Button>
+            <Button onClick={open}></Button>
             <Modal
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="parent-modal-title"
                 aria-describedby="parent-modal-description"
             >
-                <Box sx={{ ...style, width: 400 }}>
-                    <h2 id="parent-modal-title">Text in a modal</h2>
+                <Box sx={{ ...style, width: 300,}}>
+                    <center><h2 id="parent-modal-title" className="title" style={{color:"#74E7D9"}}>Add Dog</h2></center>
                     <p id="parent-modal-description">
 
                         <form onSubmit={handleSubmitDog}>
                         <DogPhotoModal handleSetDogPhoto={handleSetDogPhoto}/>
                             <p>Name:</p>
-                            <input className="input is-rounded  is-primary" type="text" placeholder="Rounded input" name="Name" onChange={(e) => handleChange('Name', e.target.value)} />
+                            <input className="input is-rounded is-small    is-primary" type="text" name="Name" onChange={(e) => handleChange('Name', e.target.value)} />
                             <p>Weight:</p>
-                            <input className="input is-rounded  is-primary" type="text" name="Weight" onChange={(e) => handleChange('Weight', e.target.value)} />
+                            <input className="input is-rounded is-small    is-primary" type="text" name="Weight" onChange={(e) => handleChange('Weight', e.target.value)} />
                             <p>Breed:</p>
-                            <input className="input is-rounded  is-primary" type="text" name="Breed" onChange={(e) => handleChange('Breed', e.target.value)} />
+                            <input className="input is-rounded is-small    is-primary" type="text" name="Breed" onChange={(e) => handleChange('Breed', e.target.value)} />
                             <p>Birthday:</p>
-                            <input className="input is-rounded  is-primary" type="date" name="Birthday" onChange={(e) => handleChange('Birthday', e.target.value)} />
+                            <input className="input is-rounded is-small    is-primary" type="date" name="Birthday" onChange={(e) => handleChange('Birthday', e.target.value)} />
                             <p>Gotchaday:</p>
-                            <input className="input is-rounded  is-primary" type="date" name="Gotchaday" onChange={(e) => handleChange('Gotchaday', e.target.value)} />
+                            <input className="input is-rounded is-small    is-primary" type="date" name="Gotchaday" onChange={(e) => handleChange('Gotchaday', e.target.value)} />
                             <p>ChipID:</p>
-                            <input className="input is-rounded  is-primary" type="text" name="ChipID" onChange={(e) => handleChange('ChipID', e.target.value)} />
+                            <input className="input is-rounded is-small    is-primary" type="text" name="ChipID" onChange={(e) => handleChange('ChipID', e.target.value)} />
                             <p>RabiesTag:</p>
-                            <input className="input is-rounded  is-primary" type="text" name="RabiesTag" onChange={(e) => handleChange('RabiesTag', e.target.value)} />
+                            <input className="input is-rounded is-small    is-primary" type="text" name="RabiesTag" onChange={(e) => handleChange('RabiesTag', e.target.value)} />
 
                             <p>Gender:</p>
                             <input type="radio" id="female" name="Gender" value="Female" onChange={(e) => handleChange('Gender', e.target.value)} />
@@ -163,17 +163,17 @@ function Adddog({ user, handleClose, open, getDogsByUser, handleSetDogs }) {
                             <label for="no">No</label>
 
                             <p>Food:</p>
-                            <input className="input is-rounded  is-primary" type="text" name="Food" onChange={(e) => handleChange('Food', e.target.value)} />
+                            <input className="input is-rounded is-small   is-small   is-small  is-primary" type="text" name="Food" onChange={(e) => handleChange('Food', e.target.value)} />
                             <p>Allergies:</p>
-                            <input className="input is-rounded  is-primary" type="text" name="Allergies" onChange={(e) => handleChange('Allergies', e.target.value)} />
+                            <input className="input is-rounded is-small   is-small    is-primary" type="text" name="Allergies" onChange={(e) => handleChange('Allergies', e.target.value)} />
                             <p>Sensitivities:</p>
-                            <input className="input is-rounded  is-primary" type="text" name="Sensitivities" onChange={(e) => handleChange('Sensitivities', e.target.value)} />
+                            <input className="input is-rounded is-small   is-small  is-primary" type="text" name="Sensitivities" onChange={(e) => handleChange('Sensitivities', e.target.value)} />
                             <p>Medication:</p>
-                            <input className="input is-rounded  is-primary" type="text" name="Medication" onChange={(e) => handleChange('Medication', e.target.value)} />
+                            <input className="input is-rounded is-small   is-small is-primary" type="text" name="Medication" onChange={(e) => handleChange('Medication', e.target.value)} />
                             <p>AdditionalInfo:</p>
-                            <input className="input is-rounded  is-primary" type="text" name="AdditionalInfo" onChange={(e) => handleChange('AdditionalInfo', e.target.value)} />
+                            <input className="input is-rounded is-small    is-small is-primary" type="text" name="AdditionalInfo" onChange={(e) => handleChange('AdditionalInfo', e.target.value)} />
 
-                            <button type="submit">Submit</button>
+                            <center><button className="button is-small is-primary" type="submit">Submit</button></center>
 
                         </form>
                     </p>

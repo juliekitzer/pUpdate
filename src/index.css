@@ -15,6 +15,7 @@
     width:386px;
     display:flex;
     justify-content: center;
+    padding-bottom: 0px;
   }
     .Registration {
       display: flex;
@@ -36,6 +37,7 @@
   
     .ActivityFeed {
       margin-bottom: 1px;
+      padding-left:65px;
     }
 
 
@@ -177,7 +179,7 @@ body {
 .topLine {
   display: flex;
   justify-content: flex-end;
-  width: 10px;
+  width: 50px;
 }
 
 .topLeft {
@@ -205,6 +207,21 @@ padding-left: 255px;
 }
 
 
-.index{
-  font-size: 18px;
+.MuiBox-root{
+  border-radius: 30px;
+  border: none;
+  font-family: fredoka;
+  font-size:medium;
+  padding: 20px 20px 20px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.careTakerModal {
+  display: flex;
+  justify-content: flex-start;
+
+ 
+  width: 1005px;
+  height: 32px;
 }

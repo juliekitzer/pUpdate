@@ -235,3 +235,26 @@ body a{
 .tabs :hover {
 color:#cb997e
 }
+
+.profilePhotoHeading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color:#cb997e;
+  font-size: 14px;
+}
+
+.css-1e6y48t-MuiButtonBase-root-MuiButton-root {
+  display: flex;
+  align-items: flex-end;
+}
+
+
+.Addactivity{
+padding-left: 81px;
+}
+
+.dogPhotoModal {
+  display: flex;
+  align-content: flex-end;
+}

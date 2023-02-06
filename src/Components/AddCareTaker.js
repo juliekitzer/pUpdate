@@ -4,6 +4,10 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import '../index.css';
+import "../stylesheets/style.css";
+import 'bulma/css/bulma.css';
 
 function AddCareTaker({activeTab}) {
     const [open, setOpen] = React.useState(false);
@@ -62,24 +66,29 @@ function AddCareTaker({activeTab}) {
 
 
   return (
-    <div>
-      <Button onClick={handleOpen}>Open modal</Button>
+    <div className="careTakerModal">
+           <Button className="button is-primary is-small" onClick={handleOpen}><PersonAddIcon style={{paddingRight:"8px"}}/> Add CareTaker</Button>
+ 
+
+ 
       <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description">
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Would you like to add a care taker to this pup?
-          </Typography>
+          <center>
+      <h6 className="careTakeTitle">
+            Would you like to add a care taker to this pet? </h6>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-          <form onSubmit={handleSubmit}><input onChange={(e) => setCareTaker( e.target.value)} placeholder="Enter the caretakers username here"></input>
-           <br/><button type="submit">Submit</button></form>
-          </Typography>
+          <form onSubmit={handleSubmit}><input className="input is-rounded" onChange={(e) => setCareTaker( e.target.value)} placeholder="Enter the caretakers username here"></input>
+           <br/><button className="button is-primary is-small" type="submit">Add care taker</button></form>
+         
+          </Typography>  </center>
         </Box>
       </Modal>
     </div>
+   
   );
 }
 

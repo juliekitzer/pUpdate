@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "../stylesheets/style.css";
 import "../stylesheets/loginStyle.css";
+import 'bulma/css/bulma.css';
 
 
 function Login({ isAuthenticated, setIsAuthenticated, user, setUser }) {
@@ -66,7 +67,7 @@ function Login({ isAuthenticated, setIsAuthenticated, user, setUser }) {
                                         <input className="input is-rounded is-primary" type="password" placeholder="Password" id="password" name="password" onChange={(e) => handleChange('password', e.target.value)} />
                                     </li>
                                 </ul>
-                                <button type='submit' className="button is-light">Login</button>
+                                <button type='submit' className="button is-primary is-light">Let's get pUpdating!</button>
                             </form>
                         </div>
                     </article>
