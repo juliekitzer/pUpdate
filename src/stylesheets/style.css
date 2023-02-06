@@ -7,11 +7,21 @@
     --tan: #FFE8D6;
     --brown: #cb997e;
   }
+
   .title {color:#ffffff}
   .tabs.is-boxed a {
   
     border-radius: 87px 87px 0 0;
     
+  }
+  .title {
+    color:#ffffff;
+
+  }
+body {
+      position: relative;
+      min-height: 100%;
+      min-height: 100vh;
 }
   .button{
       margin-left: 20px;
@@ -162,9 +172,20 @@ body a{
     padding: .375rem 1rem;
   }
 
-  .spaceBehind {
-    background-color: #CBF6F1;
-  }
+
+    .spaceBehind {
+      background-color: #CBF6F1;
+      background-image: url(../images/pattern.jpg);
+
+  
+      background-color: #cccccc; /* Used if the image is unavailable */
+
+    background-position: fixed; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; 
+  
+    }
+  
 
   .ActivityFeed {
     background-color: #fefefe;
@@ -173,6 +194,7 @@ body a{
   .box {
     width: 550px;
    margin: 20px 20px 20px 20px;
+   padding-left: 0px;
   }
   .Circle {
    
@@ -198,3 +220,18 @@ body a{
   padding-top: 20px;
 }
 
+/* footer {
+  position: absolute; right: 0;bottom:0;left:0;
+} */
+
+
+.activityIcon{
+  width:40px;
+  padding-top: 10px;
+  padding-left: 5px;
+  padding-right: 10px;
+}
+
+.tabs :hover {
+color:#cb997e
+}

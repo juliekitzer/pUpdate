@@ -9,7 +9,6 @@
 // import Modal from '@mui/material/Modal';
 // import Button from '@mui/material/Button';
 
-
 // function Modalpopup({ handleClose, open, dog, user, activities }) {
 //     const [newActivity, setNewActivity] = useState({
 //         Activity: "",
@@ -60,8 +59,6 @@
 
 //     return (
 
-
-   
 // const style = {
 //   position: 'absolute' as 'absolute',
 //   top: '50%',
@@ -136,9 +133,6 @@
 //     </div>
 //   );
 // }
-
-
-
 
 //         <Dialog onClose={handleClose} open={open}>
 //             <DialogTitle>{ }</DialogTitle>
@@ -251,11 +245,9 @@
 //                     </div>
 //                 </form>
 
-
 //             </DialogContent>
 //         </Dialog>
 //     );
 // }
-
 
 // export default Modalpopup;

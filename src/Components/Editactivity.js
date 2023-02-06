@@ -34,7 +34,7 @@ function Editactivity({ activity, editClicked, onEditClick, dogid, userid, handl
                                 activityid: activityid
                         }),
                 });
-                handleSetActivities([])
+                // handleSetActivities([])
                 handleGetActivities()
                 let resJson2 = await res2.json();
         }

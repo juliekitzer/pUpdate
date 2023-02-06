@@ -12,7 +12,9 @@ import Dogname from "../Components/Dogname";
 import "../stylesheets/style.css";
 import 'bulma/css/bulma.css'
 import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
-
+import { fontStyle } from "@mui/system";
+import AddCareTaker from "../Components/AddCareTaker";
+// import LabTabs from "../Components/miniTabs";
 
 
 function Dashboard({ isAuthenticated, setIsAuthenticated, user, setUser}) {
@@ -68,7 +70,7 @@ function Dashboard({ isAuthenticated, setIsAuthenticated, user, setUser}) {
 
     function handleGetActivities() {
         setActivities([])
-        console.log(dog)
+        console.log('inside handlegetactivities function')
         dog.forEach(doggy => {
             // console.log("tesinggggg", doggy.dogname);
 
@@ -147,7 +149,6 @@ function Dashboard({ isAuthenticated, setIsAuthenticated, user, setUser}) {
                     // console.log('loop', index)
                     return (
                         <div>
-
                             <Activitycard key={activity.id} activity={activity} handleTabChange={handleTabChange} activeTab={activeTab} tabId={activity.dogid} handleGetActivities={handleGetActivities} handleSetActivities={handleSetActivities}
 
                             />
@@ -165,7 +166,7 @@ if (dog.length > 0) {
     names = dog.map((doggy, index)=>{
         return(
             <div>
-                <Dogname doggy={doggy["Dog"].dogname} dogid={doggy.dogid} activeTab={activeTab}/>
+                <Dogname doggy={doggy["Dog"]} dogid={doggy.dogid} activeTab={activeTab}/>
             </div>
         )
     })
@@ -196,7 +197,7 @@ if (dog.length > 0) {
 
     return (
         <div className="spaceBehind">
-            <h1 className="title">Welcome, {user.firstname}!</h1>
+            <h1 className="title" style={{color:"#cb997e", fontFamily:"fredoka", paddingTop:"15px", paddingLeft:"15px"}}>Welcome, {user.firstname}!</h1>
       
             <div className="tabs is-boxed" style={{marginBottom:"0px"}}>
                 <ul >
@@ -208,10 +209,11 @@ if (dog.length > 0) {
             </div>
           
             <div className="ActivityFeed">
-            
+            {/* <LabTabs/> */}
             <div>
             
-          <div className="tabHeading"> <h1 className="title">{names}</h1> {moreInfo} </div>
+          <div className="tabHeading"> <h1 className="title">{names}</h1> 
+          <AddCareTaker activeTab={activeTab}/>{moreInfo} </div>
            
            
             {activitiescards}

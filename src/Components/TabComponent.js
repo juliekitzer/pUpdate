@@ -6,7 +6,6 @@ import Activitycard from "./Activitycard";
 
 function TabComponent({ activity, dogName, activeTab, handleTabChange, dogId, tabId, DogPhoto }) {
 
-    // console.log(dogId)
 
     // let activitiescards;
     // if (activity.length > 0) {

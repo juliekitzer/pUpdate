@@ -6,6 +6,53 @@
   --tan: #FFE8D6;
   --brown: #cb997e;
 }
+
+@media screen and (max-width: 844px) {
+  body {
+    width: 400px;
+  }
+  .login {
+    width:386px;
+    display:flex;
+    justify-content: center;
+  }
+    .Registration {
+      display: flex;
+      justify-content: center;
+      width: 200px;
+      margin-left: 95px;
+      margin-top: 30px;
+    }
+      Footer {
+       
+        font-size: 12px;
+      }
+
+      Footer a {
+        font-size: 14px;
+      }
+      
+    }
+  
+    .ActivityFeed {
+      margin-bottom: 1px;
+    }
+
+
+ #Register{
+  display: flex;
+  justify-content: center;
+  }
+
+
+  .activityIcon {
+    width: 57px;
+    padding-top: 0px;
+    padding-left: 0px;
+    padding-right: 14px;
+}
+
+
 /* body {
     color:black;
 }
@@ -114,6 +161,7 @@
 
 body {
   background-color:#fbfbfb;
+  margin-bottom: 1px;    
 }
 
 .title {color:#ffffff}
@@ -124,4 +172,39 @@ body {
 
 .tabs{
   margin-bottom: 0px;
+}
+
+.topLine {
+  display: flex;
+  justify-content: flex-end;
+  width: 10px;
+}
+
+.topLeft {
+display: flex;
+justify-content: flex-start;
+padding-left: 255px;
+
+
+}
+
+.cardHeading {
+  display:flex;
+  flex-direction:row;
+  justify-content: flex-start;
+  align-items: center;
+  padding-bottom: 30px;
+ 
+}
+
+.dogInfo {
+  color:#3f4343;
+  font-family:fredoka-light;
+  font-size: 14px;
+  padding-top: 20px;
+}
+
+
+.index{
+  font-size: 18px;
 }

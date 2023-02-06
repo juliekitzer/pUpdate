@@ -65,7 +65,7 @@ app.post('/api/join/:userid/:dogid', async function (req, res) {
         createdAt: new Date(),
         updatedAt: new Date()
     })
-
+console.log("hello", userid, dogid)
     // console.log(results);
     res.json({ results });
 })
@@ -113,6 +113,17 @@ app.get('/api/User/:id', async function (req, res) {
     let results = await User.findByPk(id);
     res.json(results);
 })
+
+app.get ('/api/user/username/:username', async function (req, res){
+const {username} = req.params 
+let results = await User.findOne({
+    where:{username:username}
+   
+})
+res.json(results)
+}) 
+
+
 
 app.post('/api/User/create', async function (req, res) {
     const { firstname, lastname, email, username, password, birthday } = req.body;
@@ -202,6 +213,16 @@ app.get('/api/Dog/:userid', async function (req, res) {
 app.get('/api/dog/delete/:id', async function (req, res) {
     const { id } = req.params;
     let results = await Dog.destroy({
+        where: {
+            id
+        }
+    })
+    res.json({ results });
+})
+
+app.delete('/api/activity/delete/', async function (req, res) {
+    const { id } = req.body;
+    let results = await Activity.destroy({
         where: {
             id
         }

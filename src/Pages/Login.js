@@ -52,7 +52,7 @@ function Login({ isAuthenticated, setIsAuthenticated, user, setUser }) {
                 <div className="tile is-parent-tile is-4 centered">
                     <article className="tile is-child notification is-primary">
                         <div>
-                            <h1>Login</h1>
+                            <h1 className="subtitle">Login</h1>
                             <form onSubmit={handleSubmit}>
                                 <ul>
                                     <li><label>Username:</label></li>

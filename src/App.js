@@ -23,7 +23,7 @@ function App() {
     }
     return (
         <div>
-            
+            <div style={{marginBottom:"100px"}}>
             <Router>
                 <Header isAuthenticated={isAuthenticated} />
                 {/* //Ternery statement is used instead of if else
@@ -35,6 +35,7 @@ function App() {
                 />
                 {/* <Tabs /> */}
             </Router>
+            </div>
             <Footer />
         </div>
     )
