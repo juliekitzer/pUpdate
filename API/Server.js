@@ -194,8 +194,10 @@ app.post('/api/JoinTable/create', async function (req, res) {
     let results = await JoinTable.create({
         dogid: dogid,
         userid: userid
+        
     })
     res.json({ results });
+    
 })
 
 app.get('/api/Dog/:userid', async function (req, res) {
@@ -207,7 +209,9 @@ app.get('/api/Dog/:userid', async function (req, res) {
         },
         include: Dog
     })
+    console.log(results)
     res.json(results);
+    
 });
 
 app.get('/api/dog/delete/:id', async function (req, res) {
@@ -234,6 +238,8 @@ app.delete('/api/activity/delete/', async function (req, res) {
 app.listen(portNumber, function (req, res) {
     // console.log(`Listening on port ${portNumber}`);
 })
+
+
 
 
 
